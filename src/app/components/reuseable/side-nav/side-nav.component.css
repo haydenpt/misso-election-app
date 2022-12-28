@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  height: 100%;
+}
+
+mat-drawer-container { flex: 1 1 auto; }
+
+.sidenav {
+  width: auto;
+  background-color: #e6ebf5;
+}
+
+.sidenav-content {
+  display: flex;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.nav-item {
+  margin: 5px;
+}
+
+.nav-item-title {
+  margin-left: 10px;
+  color: indigo;
+  font-size: 16px;
+}
+
+.nav-logo {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}

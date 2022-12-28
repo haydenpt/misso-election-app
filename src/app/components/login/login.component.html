@@ -1,0 +1,29 @@
+<div class="login-form">
+  <div class="form-field">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput [formControl]="email" (click)="onInputClick()">
+      <mat-error *ngIf="email.invalid">{{getEmailError()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="password" (click)="onInputClick()">
+      <mat-error *ngIf="password.invalid">{{getPasswordError()}}</mat-error>
+
+    </mat-form-field>
+  </div>
+
+
+  <div class="form-field">
+    <button mat-flat-button color="primary"
+            [disabled]="!isValid()"
+            (click)="onLogin()">Log in
+    </button>
+    <div [hidden]="!showMessage">
+      <p class="mat-body-2" [ngClass]="{ 'mat-error': !authorized, 'login-success': authorized }">{{ loginMessage }}</p>
+    </div>
+  </div>
+</div>
