@@ -2,10 +2,18 @@
 
 @include mat-core();
 
-$custom-theme-primary: mat-palette($mat-indigo);
+$custom-theme-primary: mat-palette($mat-blue-grey);
 $custom-theme-accent: mat-palette($mat-blue);
-$custom-theme-warn: mat-palette($mat-red);
 
-$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+$custom-typography: mat-typography-config(
+  $body-2: mat-typography-level(16px, 16px, 500, $letter-spacing: 0.6px)
+);
 
-@include angular-material-theme($custom-theme)
+
+$custom-theme: mat-light-theme(
+    $custom-theme-primary,
+    $custom-theme-accent,
+    );
+
+@include angular-material-theme($custom-theme);
+@include angular-material-typography($custom-typography);

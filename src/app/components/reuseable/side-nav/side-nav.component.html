@@ -1,12 +1,13 @@
 <mat-drawer-container class="container">
   <mat-drawer mode="side" [opened]="true" class="sidenav">
-    <div class="nav-logo">
-      <img src="favicon.ico" alt="logo of organization">
+    <div class="nav-logo-container">
+      <img src="/assets/logo-white.png" alt="logo of organization" class="nav-logo">
     </div>
     <mat-nav-list role="list" class="nav-list">
-      <mat-list-item *ngFor="let item of navList" role="listitem" class="nav-item" (click)="onNavigate(item.destination)">
-        <mat-icon color="primary" matListItemIcon>{{ item.icon }}</mat-icon>
-        <span class="nav-item-title">{{ item.name }}</span>
+      <mat-list-item *ngFor="let item of navList" #item role="listitem" class="nav-item"
+                     (click)="onNavigate(item.destination)">
+        <mat-icon class="nav-item-icon">{{ item.icon }}</mat-icon>
+        <span class="nav-item-title mat-body-2">{{ item.name }}</span>
       </mat-list-item>
     </mat-nav-list>
   </mat-drawer>

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prompt-list-page.component.css']
 })
 export class PromptListPageComponent implements OnInit {
+  title: string = 'Available Positions';
 
   constructor() { }
 

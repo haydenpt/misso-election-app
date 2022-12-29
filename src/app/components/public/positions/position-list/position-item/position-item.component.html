@@ -1,0 +1,10 @@
+<mat-card class="position-card">
+  <mat-card-content class="position-card-content">
+    {{ position.title }}
+    <mat-icon>{{ position.icon }}</mat-icon>
+  </mat-card-content>
+  <mat-action-list class="position-card-action">
+    <button mat-raised-button color="primary" (click)="onViewPrompt(position.promptUrl)">View Prompt</button>
+    <button mat-raised-button color="accent"  (click)="onApply(position.title)">Apply</button>
+  </mat-action-list>
+</mat-card>

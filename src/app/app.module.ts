@@ -19,6 +19,12 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
+import { PositionListComponent } from './components/public/positions/position-list/position-list.component';
+import { PositionItemComponent } from './components/public/positions/position-list/position-item/position-item.component';
+import {MatCardModule} from "@angular/material/card";
+import { MessageComponent } from './components/reuseable/message/message.component';
+import { PageHeaderComponent } from './components/reuseable/page-header/page-header.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 const appRoutes: Routes = [
   {path: '', component: HomePageComponent},
@@ -36,21 +42,27 @@ const appRoutes: Routes = [
     PromptListPageComponent,
     PromptDetailPageComponent,
     SideNavComponent,
+    PositionListComponent,
+    PositionItemComponent,
+    MessageComponent,
+    PageHeaderComponent,
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    FormsModule,
-    RouterModule.forRoot(appRoutes),
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatSlideToggleModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        FormsModule,
+        RouterModule.forRoot(appRoutes),
+        MatSidenavModule,
+        MatListModule,
+        MatIconModule,
+        MatCardModule,
+        MatToolbarModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

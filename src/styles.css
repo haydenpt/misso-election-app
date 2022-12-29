@@ -1,3 +1,13 @@
 html, body {
   height: 100%;
+  margin: 0;
+}
+
+.page {
+  width: 100vw;
+}
+
+.page-content {
+  margin-top: 100px;
+  margin-left: 10px;
 }
