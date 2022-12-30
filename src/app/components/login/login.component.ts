@@ -67,7 +67,6 @@ export class LoginComponent {
       this.messageType = 'error';
     }
     this.showMessage = true;
-    this.alertService.alert(this.authorized ? 'success' : 'error', this.loginMessage)
     return this.authorized;
   }
 
