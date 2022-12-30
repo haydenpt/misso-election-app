@@ -1,5 +1,5 @@
-<div class="alert-container">
-  <p class="alert-message">
-    Alert
+<div class="alert-container" [ngStyle]="{backgroundColor: backgroundColor}">
+  <p class="alert-message mat-body-1" [ngStyle]="{color: textColor}">
+    {{ message }}
   </p>
 </div>

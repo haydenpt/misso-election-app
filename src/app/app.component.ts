@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthenticationService} from "./services/authentication/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,17 @@ import {AuthenticationService} from "./services/authentication/authentication.se
 export class AppComponent {
   title = 'voting-app-frontend';
   loggedIn : boolean = true;
+  path: string = '';
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService,
+              private router: Router) {
     this.authService.loggedIn.subscribe((loginStatus) => {
       this.loggedIn = loginStatus;
     })
+  }
+
+  loginPath() {
+    return ('/login' === this.router.url);
   }
 
 }

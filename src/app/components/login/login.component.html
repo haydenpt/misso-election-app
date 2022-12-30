@@ -26,5 +26,5 @@
       <p class="mat-body-2" [ngClass]="{ 'mat-error': !authorized, 'login-success': authorized }">{{ loginMessage }}</p>
     </div>
   </div>
-      <app-alert></app-alert>
+      <app-alert [message]="loginMessage" [type]='messageType' *ngIf="showMessage"></app-alert>
 </div>

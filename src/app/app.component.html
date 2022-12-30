@@ -1,2 +1,2 @@
-<app-login-page *ngIf="!loggedIn"></app-login-page>
-<app-side-nav *ngIf="loggedIn"></app-side-nav>
+<app-login-page *ngIf="loginPath()"></app-login-page>
+<app-side-nav *ngIf="!loginPath()"></app-side-nav>

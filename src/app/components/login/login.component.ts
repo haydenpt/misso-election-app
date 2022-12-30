@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {AlertService} from "../../services/alert/alert.service";
+import {AlertService, AlertType} from "../../services/alert/alert.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 
 @Component({
@@ -13,25 +13,31 @@ export class LoginComponent {
   email = new FormControl('test@test', [Validators.required, Validators.email]);
   password = new FormControl('123', [Validators.required]);
 
-  authorized : boolean = false;
+  authorized: boolean = false;
 
   loginMessage: string = '';
+  messageType: AlertType = '';
   showMessage: boolean = false;
 
-  constructor(private router : Router,
+  constructor(private router: Router,
               private alertService: AlertService,
-              private authService: AuthenticationService) {}
+              private authService: AuthenticationService) {
+  }
 
   onLogin() {
-    console.log(this.email.value + " " + this.password.value);
+    console.log('in onLogin()');
+    this.showMessage = true;
     if (this.isAuthorized()) {
+      this.loginMessage = 'successful';
       setTimeout(() => {
         this.router.navigate(['home']);
         this.authService.loggedIn.emit(true);
-      },1000)
+        this.showMessage = false;
+      }, 1000)
     } else {
-      console.log('log in failed');
+      this.loginMessage = 'failed';
     }
+    console.log(this.loginMessage)
   }
 
   getEmailError() {
@@ -55,8 +61,10 @@ export class LoginComponent {
     this.authorized = this.isValid() && this.email.value === 'test@test' && this.password.value === '123';
     if (this.authorized) {
       this.loginMessage = 'Login successful'
+      this.messageType = 'success';
     } else {
       this.loginMessage = 'Login failed';
+      this.messageType = 'error';
     }
     this.showMessage = true;
     this.alertService.alert(this.authorized ? 'success' : 'error', this.loginMessage)
