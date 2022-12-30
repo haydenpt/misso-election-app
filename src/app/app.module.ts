@@ -25,26 +25,45 @@ import {PositionListComponent} from './components/public/positions/position-list
 import {PositionItemComponent} from './components/public/positions/position-list/position-item/position-item.component';
 import {MessageComponent} from './shared/message/message.component';
 import {PageHeaderComponent} from './shared/page-header/page-header.component';
+import {CandidateListComponent} from './components/public/candidate-list/candidate-list.component';
 
 // Pages
 import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {PromptListPageComponent} from './pages/prompt-list-page/prompt-list-page.component';
 import {PromptDetailPageComponent} from './pages/prompt-detail-page/prompt-detail-page.component';
-import {CandidatePageComponent} from './pages/candidate-page/candidate-page.component';
-import { MyAccountPageComponent } from './pages/my-account-page/my-account-page.component';
+import {MyAccountPageComponent} from './pages/my-account-page/my-account-page.component';
 
 // Services
 import {AlertService} from "./services/alert/alert.service";
-import { AlertComponent } from './shared/alert/alert.component';
+import {AlertComponent} from './shared/alert/alert.component';
+import {CandidatePageComponent} from './pages/candidate-page/candidate-page.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomePageComponent},
-  {path: 'login', component: LoginPageComponent},
-  {path: 'prompts', component: PromptListPageComponent},
-  {path: 'home', component: HomePageComponent},
-  {path: 'candidates', component: CandidatePageComponent},
-  {path: 'my-account', component: MyAccountPageComponent},
+  {
+    path: '',
+    component: HomePageComponent
+  },
+  {
+    path: 'login',
+    component: LoginPageComponent
+  },
+  {
+    path: 'positions',
+    component: PromptListPageComponent,
+  },
+  {
+    path: 'candidate/:position',
+    component: CandidatePageComponent,
+  },
+  {
+    path: 'home',
+    component: HomePageComponent
+  },
+  {
+    path: 'my-account',
+    component: MyAccountPageComponent
+  },
 ]
 
 @NgModule({
@@ -60,9 +79,10 @@ const appRoutes: Routes = [
     HomePageComponent,
     PromptListPageComponent,
     PromptDetailPageComponent,
-    CandidatePageComponent,
     MyAccountPageComponent,
     AlertComponent,
+    CandidateListComponent,
+    CandidatePageComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {Position} from "./position.model";
 export class PositionService {
   private positions: Position[] = [
     {
+      id: 'TECH',
       title: 'Technology',
       team: 'Education',
       rank: 'Team Lead',
@@ -14,6 +15,7 @@ export class PositionService {
       promptUrl: 'https://misso.org'
     },
     {
+      id: 'JAVA',
       title: 'Java',
       team: 'Education',
       rank: 'Officer',
@@ -21,6 +23,7 @@ export class PositionService {
       promptUrl: 'https://misso.org'
     },
     {
+      id: 'DATA',
       title: 'Database',
       team: 'Education',
       rank: 'Team Lead',
@@ -28,6 +31,7 @@ export class PositionService {
       promptUrl: 'https://misso.org'
     },
     {
+      id: 'TRAN',
       title: 'Transaction Processing',
       team: 'Education',
       rank: 'Officer',
@@ -36,7 +40,7 @@ export class PositionService {
     }
   ];
 
-  getPositions() {
+  getAllPositions() {
     return this.positions.slice();
   }
 }

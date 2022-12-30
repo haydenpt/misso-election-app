@@ -10,8 +10,8 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
 export class SideNavComponent implements OnInit {
   navList = [
     {name: 'Home', icon: 'home', destination: 'home'},
-    {name: 'Prompts', icon: 'assignment', destination: 'prompts'},
-    {name: 'Candidates', icon: 'groups', destination: 'candidates'},
+    {name: 'Prompts', icon: 'assignment', destination: 'positions'},
+    // {name: 'Candidates', icon: 'groups', destination: 'candidates'},
     {name: 'My Account', icon: 'edit', destination: 'my-account'},
     {name: 'Log Out', icon: 'exit_to_app', destination: 'login'},
   ]

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-position-item',
@@ -8,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class PositionItemComponent implements OnInit {
   @Input() position: any;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,5 +21,13 @@ export class PositionItemComponent implements OnInit {
 
   onApply(title: string) {
     console.log('Applied to ' + title);
+  }
+
+  onViewCandidate(position: string) {
+    this.router.navigate(['candidate', this.formatUrlParam(position)])
+  }
+
+  formatUrlParam(param: string) {
+    return param.toLowerCase().replace(' ', '-');
   }
 }

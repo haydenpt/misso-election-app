@@ -14,7 +14,7 @@ export class PositionListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.positions = this.positionService.getPositions();
+    this.positions = this.positionService.getAllPositions();
   }
 
 }

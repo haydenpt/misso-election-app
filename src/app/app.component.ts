@@ -8,7 +8,7 @@ import {AuthenticationService} from "./services/authentication/authentication.se
 })
 export class AppComponent {
   title = 'voting-app-frontend';
-  loggedIn : boolean = false;
+  loggedIn : boolean = true;
 
   constructor(private authService: AuthenticationService) {
     this.authService.loggedIn.subscribe((loginStatus) => {
