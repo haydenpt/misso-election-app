@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AlertService} from "../../services/alert/alert.service";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   email = new FormControl('test@test', [Validators.required, Validators.email]);
   password = new FormControl('123', [Validators.required]);
 
@@ -16,18 +18,17 @@ export class LoginComponent implements OnInit {
   loginMessage: string = '';
   showMessage: boolean = false;
 
-  constructor(private router : Router) {
-  }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private router : Router,
+              private alertService: AlertService,
+              private authService: AuthenticationService) {}
 
   onLogin() {
     console.log(this.email.value + " " + this.password.value);
     if (this.isAuthorized()) {
-      this.router.navigate(['home']);
-
+      setTimeout(() => {
+        this.router.navigate(['home']);
+        this.authService.loggedIn.emit(true);
+      },1000)
     } else {
       console.log('log in failed');
     }
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
       this.loginMessage = 'Login failed';
     }
     this.showMessage = true;
+    this.alertService.alert(this.authorized ? 'success' : 'error', this.loginMessage)
     return this.authorized;
   }
 
@@ -66,4 +68,6 @@ export class LoginComponent implements OnInit {
     this.loginMessage = '';
     this.showMessage = false;
   }
+
+
 }

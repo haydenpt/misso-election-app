@@ -18,9 +18,9 @@ mat-form-field {
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
   /*border: 2px solid;*/
 }
 

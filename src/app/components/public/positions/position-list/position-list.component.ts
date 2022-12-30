@@ -1,47 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {Position} from "../position.model";
+import {Position} from "../../../../services/position/position.model";
+import {PositionService} from "../../../../services/position/position.service";
 
 @Component({
   selector: 'app-position-list',
   templateUrl: './position-list.component.html',
-  styleUrls: ['./position-list.component.css']
+  styleUrls: ['./position-list.component.css'],
+  providers: [PositionService]
 })
 export class PositionListComponent implements OnInit {
-  positions: Position[] = [
-    {
-      title: 'Technology',
-      team: 'Education',
-      rank: 'Team Lead',
-      icon: 'settings',
-      promptUrl: 'https://misso.org'
-    },
-    {
-      title: 'Java',
-      team: 'Education',
-      rank: 'Officer',
-      icon: 'local_cafe',
-      promptUrl: 'https://misso.org'
-    },
-    {
-      title: 'Database',
-      team: 'Education',
-      rank: 'Team Lead',
-      icon: 'settings',
-      promptUrl: 'https://misso.org'
-    },
-    {
-      title: 'Transaction Processing',
-      team: 'Education',
-      rank: 'Officer',
-      icon: 'local_cafe',
-      promptUrl: 'https://misso.org'
-    }
-  ];
-
-  constructor() {
+  positions: Position[] = [];
+  constructor(private positionService: PositionService) {
   }
 
   ngOnInit(): void {
+    this.positions = this.positionService.getPositions();
   }
 
 }
