@@ -13,7 +13,7 @@ export class SideNavComponent implements OnInit {
     {name: 'Prompts', icon: 'assignment', destination: 'positions'},
     // {name: 'Candidates', icon: 'groups', destination: 'candidates'},
     {name: 'My Account', icon: 'edit', destination: 'my-account'},
-    {name: 'Log Out', icon: 'exit_to_app', destination: 'login'},
+    {name: 'Log Out', icon: 'exit_to_app', destination: 'logout'},
   ]
 
   constructor(private router : Router,
@@ -25,8 +25,8 @@ export class SideNavComponent implements OnInit {
 
   onNavigate(destination : string) {
     this.router.navigate([destination]);
-    if (destination === 'login') {
-      this.authService.loggedIn.emit(false);
+    if (destination === 'logout') {
+      this.authService.logout();
     }
   }
 }

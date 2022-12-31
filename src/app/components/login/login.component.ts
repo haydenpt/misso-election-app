@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AlertService, AlertType} from "../../services/alert/alert.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
@@ -9,42 +9,46 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   email = new FormControl('test@test', [Validators.required, Validators.email]);
   password = new FormControl('123', [Validators.required]);
 
-  authorized: boolean = false;
-
-  loginMessage: string = '';
-  messageType: AlertType = '';
-  showMessage: boolean = false;
+  loginForm: FormGroup;
 
   constructor(private router: Router,
               private alertService: AlertService,
               private authService: AuthenticationService) {
+    this.loginForm = new FormGroup({
+      'email': this.email,
+      'password': this.password
+    })
   }
+
+  ngOnInit(): void {
+    this.loginForm.statusChanges.subscribe(() => {
+      this.alertService.hide();
+    })
+  }
+
 
   onLogin() {
     console.log('in onLogin()');
-    this.showMessage = true;
-    if (this.isAuthorized()) {
-      this.loginMessage = 'successful';
+    this.alertService.show();
+
+    if (this.authService.authenticate(<string>this.email.value, <string>this.password.value)) {
+      this.alertService.alert('success', 'successful');
+
       setTimeout(() => {
         this.router.navigate(['home']);
-        this.authService.loggedIn.emit(true);
-        this.showMessage = false;
       }, 1000)
+
     } else {
-      this.loginMessage = 'failed';
+      this.alertService.alert('error', 'failed');
     }
-    console.log(this.loginMessage)
   }
 
   getEmailError() {
-    if (this.email.hasError('required')) {
-      return 'Email is required';
-    }
-    return this.email.hasError('email') ? 'Please enter a valid email' : '';
+    return this.email.hasError('email') || this.email.hasError('required') ? 'Please enter a valid email' : '';
   }
 
   getPasswordError() {
@@ -53,27 +57,19 @@ export class LoginComponent {
 
   isValid(): boolean {
     // Validate form to enable login button
-    return !(this.email.invalid || this.password.invalid);
+    return (this.email.valid && this.password.valid);
   }
 
-  isAuthorized() {
-    // TODO Make call to database to validate user credentials
-    this.authorized = this.isValid() && this.email.value === 'test@test' && this.password.value === '123';
-    if (this.authorized) {
-      this.loginMessage = 'Login successful'
-      this.messageType = 'success';
-    } else {
-      this.loginMessage = 'Login failed';
-      this.messageType = 'error';
-    }
-    this.showMessage = true;
-    return this.authorized;
+  getMessage() {
+    return this.alertService.message;
   }
 
-  onInputClick() {
-    // Clear login message when user click on the text box
-    this.loginMessage = '';
-    this.showMessage = false;
+  getType(): AlertType {
+    return this.alertService.type;
+  }
+
+  getHidden() {
+    return this.alertService.hidden;
   }
 
 

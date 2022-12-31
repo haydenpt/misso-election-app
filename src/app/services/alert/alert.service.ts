@@ -10,8 +10,22 @@ export type AlertType = '' | 'success' | 'info' | 'error' | 'warning' | 'basic'
 })
 
 export class AlertService {
-  alert() {
+  message: string = '';
+  type: AlertType = '';
+  hidden: boolean = true;
+
+  alert(type: AlertType, message: string) {
+    this.message = message;
+    this.type = type;
     console.log('In AlertService')
+  }
+
+  show() {
+    this.hidden = false;
+  }
+
+  hide() {
+    this.hidden = true;
   }
 
 

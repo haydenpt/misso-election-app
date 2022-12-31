@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 
 // Angular modules
 import {BrowserModule} from '@angular/platform-browser';
-import {RouterModule, Routes} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
@@ -33,38 +32,15 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
 import {PromptListPageComponent} from './pages/prompt-list-page/prompt-list-page.component';
 import {PromptDetailPageComponent} from './pages/prompt-detail-page/prompt-detail-page.component';
 import {MyAccountPageComponent} from './pages/my-account-page/my-account-page.component';
+import {CandidatePageComponent} from './pages/candidate-page/candidate-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 // Services
 import {AlertService} from "./services/alert/alert.service";
 import {AlertComponent} from './shared/alert/alert.component';
-import {CandidatePageComponent} from './pages/candidate-page/candidate-page.component';
-
-const appRoutes: Routes = [
-  {
-    path: '',
-    component: HomePageComponent
-  },
-  {
-    path: 'login',
-    component: LoginPageComponent
-  },
-  {
-    path: 'positions',
-    component: PromptListPageComponent,
-  },
-  {
-    path: 'candidate/:position',
-    component: CandidatePageComponent,
-  },
-  {
-    path: 'home',
-    component: HomePageComponent
-  },
-  {
-    path: 'my-account',
-    component: MyAccountPageComponent
-  },
-]
+import {AppRoutingModule} from "./app-routing.module";
+import {AuthenticationService} from "./services/authentication/authentication.service";
+import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -83,6 +59,7 @@ const appRoutes: Routes = [
     AlertComponent,
     CandidateListComponent,
     CandidatePageComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,14 +70,14 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatButtonModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes),
+    AppRoutingModule,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
     MatCardModule,
     MatToolbarModule,
   ],
-  providers: [AlertService],
+  providers: [AlertService, AuthenticationService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
