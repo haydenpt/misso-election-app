@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Candidate} from "../../services/backend/position/candidate.model";
 
 @Component({
   selector: 'app-candidate-list',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidate-list.component.css']
 })
 export class CandidateListComponent implements OnInit {
+  candidates: Candidate[] = [];
+  @Input() positionId: any;
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -24,7 +24,8 @@ export class PositionItemComponent implements OnInit {
   }
 
   onViewCandidate(position: string) {
-    this.router.navigate(['candidate', this.formatUrlParam(position)])
+    console.log(position)
+    this.router.navigate([this.router.url, this.formatUrlParam(position)])
   }
 
   formatUrlParam(param: string) {

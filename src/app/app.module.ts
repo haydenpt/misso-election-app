@@ -24,7 +24,7 @@ import {PositionListComponent} from './components/public/positions/position-list
 import {PositionItemComponent} from './components/public/positions/position-list/position-item/position-item.component';
 import {MessageComponent} from './shared/message/message.component';
 import {PageHeaderComponent} from './shared/page-header/page-header.component';
-import {CandidateListComponent} from './components/public/candidate-list/candidate-list.component';
+import {CandidateListComponent} from './components/candidate-list/candidate-list.component';
 
 // Pages
 import {LoginPageComponent} from './pages/login-page/login-page.component';

@@ -28,7 +28,7 @@ const appRoutes: Routes = [
     component: PromptListPageComponent,
   },
   {
-    path: 'candidate/:position',
+    path: 'positions/:position',
     component: CandidatePageComponent,
   },
   {
