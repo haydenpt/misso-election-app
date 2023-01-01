@@ -1,0 +1,10 @@
+<mat-card *ngFor="let candidate of candidates">
+  <mat-card-content *ngIf="candidates.length > 0">
+      {{ candidate.candidateId }}
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="candidates.length <= 0">
+  <mat-card-content >
+    No candidate
+  </mat-card-content>
+</mat-card>

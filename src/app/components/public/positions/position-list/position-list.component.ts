@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Position} from "../../../../services/backend/position/position.model";
 import {PositionService} from "../../../../services/backend/position/position.service";
-import {Candidate} from "../../../../services/backend/position/candidate.model";
 
 @Component({
   selector: 'app-position-list',
@@ -11,17 +10,16 @@ import {Candidate} from "../../../../services/backend/position/candidate.model";
 })
 export class PositionListComponent implements OnInit {
   positions: Position[] = [];
-  candidates: Candidate[] = [];
   constructor(private positionService: PositionService) {
+
   }
 
   ngOnInit(): void {
     this.positionService.getAllPositions().subscribe((positions) => {
       this.positions = positions.slice();
     });
-    this.positionService.getAllCandidates().subscribe((candidates) => {
-      this.candidates = candidates.slice()
-    })
+    this.positionService.getAllCandidates();
+
   }
 
 }

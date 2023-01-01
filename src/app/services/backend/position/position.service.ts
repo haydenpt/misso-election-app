@@ -7,13 +7,24 @@ import {Candidate} from "./candidate.model";
   providedIn: 'root'
 })
 export class PositionService {
-  constructor(private http: HttpClient) {}
+  static candidates: Candidate[] = [];
+
+  constructor(private http: HttpClient) {
+  }
 
   getAllPositions() {
     return this.http.get<Position[]>('http://localhost:8080/positions/get-all');
   }
 
+  // Get candidates from all positions
   getAllCandidates() {
-    return this.http.get<Candidate[]>(`http://localhost:8080/candidates`);
+    this.http.get<Candidate[]>(`http://localhost:8080/candidates`).subscribe(data => {
+      PositionService.candidates = data.slice();
+    });
+  }
+
+  // Get candidate list for each position
+  getPositionCandidates(positionId: string) {
+    return this.http.get<Candidate[]>(`http://localhost:8080/candidates/${positionId}`);
   }
 }

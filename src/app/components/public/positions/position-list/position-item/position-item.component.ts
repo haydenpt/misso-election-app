@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {Position} from "../../../../../services/backend/position/position.model";
 
 @Component({
   selector: 'app-position-item',
@@ -23,9 +24,8 @@ export class PositionItemComponent implements OnInit {
     console.log('Applied to ' + title);
   }
 
-  onViewCandidate(position: string) {
-    console.log(position)
-    this.router.navigate([this.router.url, this.formatUrlParam(position)])
+  onViewCandidate(position: Position) {
+    this.router.navigate([this.router.url, this.formatUrlParam(position.title)], {queryParams: {id: position.positionId.toLowerCase()}});
   }
 
   formatUrlParam(param: string) {

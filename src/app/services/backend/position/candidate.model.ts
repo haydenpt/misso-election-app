@@ -1,8 +1,8 @@
 export class Candidate {
-  private candidateId: string;
-  private submissionId: string;
+  candidateId: string;
+  submissionId: string;
   positionId: string;
-  private createOn: string;
+  createOn: string;
 
 
   constructor(candidateId: string, submissionId: string, positionId: string, createOn: string) {

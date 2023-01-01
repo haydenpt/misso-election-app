@@ -24,7 +24,7 @@ import {PositionListComponent} from './components/public/positions/position-list
 import {PositionItemComponent} from './components/public/positions/position-list/position-item/position-item.component';
 import {MessageComponent} from './shared/message/message.component';
 import {PageHeaderComponent} from './shared/page-header/page-header.component';
-import {CandidateListComponent} from './components/candidate-list/candidate-list.component';
+import {CandidateListComponent} from './components/public/candidate-list/candidate-list.component';
 
 // Pages
 import {LoginPageComponent} from './pages/login-page/login-page.component';
@@ -41,6 +41,7 @@ import {AlertComponent} from './shared/alert/alert.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthenticationService} from "./services/authentication/authentication.service";
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
+import {PositionService} from "./services/backend/position/position.service";
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
     MatCardModule,
     MatToolbarModule,
   ],
-  providers: [AlertService, AuthenticationService, AuthGuardService],
+  providers: [AlertService, AuthenticationService, AuthGuardService, PositionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
