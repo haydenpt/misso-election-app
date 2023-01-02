@@ -1,5 +1,6 @@
 <div class="alert-container" [ngStyle]="{backgroundColor: backgroundColor}">
   <p class="alert-message mat-body-1" [ngStyle]="{color: textColor}">
     {{ message }}
+    <mat-icon class="alert-button" aria-hidden="false" (click)="onClose()">clear</mat-icon>
   </p>
 </div>

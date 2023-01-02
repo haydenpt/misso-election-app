@@ -6,6 +6,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
+// Firebase
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {environment} from "../environments/environment";
+
 // Material modules
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatInputModule} from "@angular/material/input";
@@ -43,6 +51,7 @@ import {AuthenticationService} from "./services/authentication/authentication.se
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import {PositionService} from "./services/backend/position/position.service";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,6 +86,11 @@ import {PositionService} from "./services/backend/position/position.service";
     MatIconModule,
     MatCardModule,
     MatToolbarModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [AlertService, AuthenticationService, AuthGuardService, PositionService],
   bootstrap: [AppComponent]

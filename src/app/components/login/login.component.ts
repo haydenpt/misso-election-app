@@ -31,20 +31,9 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onLogin() {
+  async onLogin() {
     console.log('in onLogin()');
-    this.alertService.show();
-
-    if (this.authService.authenticate(<string>this.email.value, <string>this.password.value)) {
-      this.alertService.alert('success', 'successful');
-
-      setTimeout(() => {
-        this.router.navigate(['home']);
-      }, 1000)
-
-    } else {
-      this.alertService.alert('error', 'failed');
-    }
+    await this.authService.login(<string>this.email.value, <string>this.password.value);
   }
 
   getEmailError() {

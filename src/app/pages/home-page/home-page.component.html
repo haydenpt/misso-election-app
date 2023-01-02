@@ -4,4 +4,6 @@
 
 <div class="page-content">
   <p class="mat-h2">Welcome to MISSO Election App</p>
+  <p class="mat-h2">I want to ...</p>
+  <button mat-raised-button class="mat-h2" *ngFor="let action of homeActions" [routerLink]="action.path">{{ action.name }}</button>
 </div>

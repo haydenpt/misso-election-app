@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {AlertType} from "../../services/alert/alert.service";
+import {AlertService, AlertType} from "../../services/alert/alert.service";
 
 @Component({
   selector: 'app-alert',
@@ -13,6 +13,8 @@ export class AlertComponent implements OnChanges {
   backgroundColor: string = '';
   textColor: string = '';
 
+  constructor(private alertService: AlertService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     this.message = changes['message'].currentValue;
@@ -46,5 +48,9 @@ export class AlertComponent implements OnChanges {
   setAlertStyle(backgroundColor: string, textColor: string) {
     this.backgroundColor = backgroundColor;
     this.textColor = textColor;
+  }
+
+  onClose() {
+    this.alertService.hide();
   }
 }

@@ -17,15 +17,14 @@ export class AlertService {
   alert(type: AlertType, message: string) {
     this.message = message;
     this.type = type;
-    console.log('In AlertService')
-  }
-
-  show() {
     this.hidden = false;
+    console.log('In AlertService')
   }
 
   hide() {
     this.hidden = true;
+    this.message = '';
+    this.type = '';
   }
 
 
