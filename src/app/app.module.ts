@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 // Firebase
 import {AngularFireModule} from "@angular/fire/compat";
@@ -50,6 +50,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {AuthenticationService} from "./services/authentication/authentication.service";
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import {PositionService} from "./services/backend/position/position.service";
+import { TokenInterceptor } from './services/config/TokenInterceptor';
 
 
 @NgModule({
@@ -92,7 +93,13 @@ import {PositionService} from "./services/backend/position/position.service";
     AngularFireStorageModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AlertService, AuthenticationService, AuthGuardService, PositionService],
+  providers: [
+    AlertService,
+    AuthenticationService,
+    AuthGuardService,
+    PositionService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
