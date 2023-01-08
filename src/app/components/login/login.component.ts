@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AlertService, AlertType} from "../../services/alert/alert.service";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,8 @@ import {AuthenticationService} from "../../services/authentication/authenticatio
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email = new FormControl('test@test', [Validators.required, Validators.email]);
-  password = new FormControl('123', [Validators.required]);
+  email = new FormControl(environment.testUser.email, [Validators.required, Validators.email]);
+  password = new FormControl(environment.testUser.password, [Validators.required]);
 
   loginForm: FormGroup;
 
