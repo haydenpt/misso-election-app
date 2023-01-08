@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(private authService: AuthenticationService,
               private router: Router) {
-    this.loggedIn = this.authService.sessionLoggedIn();
+    this.loggedIn = this.authService.localStorageLoggedIn();
     // this.authService.loggedInState.subscribe((loginStatus) => {
     //   this.loggedIn = loginStatus;
     // })

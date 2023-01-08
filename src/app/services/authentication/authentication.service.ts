@@ -2,15 +2,17 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "../alert/alert.service";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  loginSession: string = 'loggedIn';
+  loginLocalStorage: string = 'logged_in';
   userData: any;
 
-  sessionUser: string = 'user'
+  localStorageUser: string = 'user'
+  localStorageUserType: string = 'user_type'
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,18 +25,19 @@ export class AuthenticationService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        localStorage.setItem(this.localStorageUser, JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem(this.localStorageUser)!);
       } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        // When logout
+        // localStorage.setItem(this.localStorageUser, 'null');
+        // JSON.parse(localStorage.getItem(this.localStorageUser)!);
+        localStorage.clear();
       }
     });
   }
 
-  sessionLoggedIn() {
-    return sessionStorage.getItem(this.loginSession) !== null;
-
+  localStorageLoggedIn() {
+    return localStorage.getItem(this.loginLocalStorage) !== null;
   }
 
   login(email: string, password: string) {
@@ -42,8 +45,8 @@ export class AuthenticationService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        sessionStorage.setItem(this.sessionUser, <string>result.user?.email)
-        sessionStorage.setItem(this.loginSession, <string>result.user?.uid);
+        // set user type to determine basic auth credentials
+        localStorage.setItem(this.localStorageUserType, environment.apiAdmin.email.includes(<string>result.user?.email) ? 'admin' : 'member');
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.alertService.alert('success', 'success')
@@ -58,7 +61,7 @@ export class AuthenticationService {
 
   logout() {
     this.afAuth.signOut().then(() => {
-      sessionStorage.clear();
+      this.alertService.alert('info', 'You have been logged out.')
     });
 
   }
