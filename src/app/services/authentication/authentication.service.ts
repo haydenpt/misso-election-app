@@ -8,7 +8,7 @@ import {environment} from "../../../environments/environment";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  loginLocalStorage: string = 'logged_in';
+  loginStateInLocalStorage: string = 'logged_in';
   userData: any;
 
   localStorageUser: string = 'user'
@@ -36,8 +36,8 @@ export class AuthenticationService {
     });
   }
 
-  localStorageLoggedIn() {
-    return localStorage.getItem(this.loginLocalStorage) !== null;
+  isLoggedIn() {
+    return localStorage.getItem(this.localStorageUser) !== null;
   }
 
   login(email: string, password: string) {

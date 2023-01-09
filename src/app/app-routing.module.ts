@@ -16,11 +16,13 @@ const appRoutes: Routes = [
   },
   {
     path: 'login',
+    title: 'MISSO Election | Log In',
     component: LoginPageComponent
   },
   {
     path: 'logout',
-    redirectTo: 'login'
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'positions',

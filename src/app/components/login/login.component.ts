@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.logout();
     this.loginForm.statusChanges.subscribe(() => {
       this.alertService.hide();
     })
