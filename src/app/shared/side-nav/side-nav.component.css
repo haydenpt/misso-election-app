@@ -55,3 +55,14 @@
 .active {
   background-color: #A27B5C !important;
 }
+
+.menu-toggle {
+  /*position: absolute;*/
+}
+
+/*.blurred-content {*/
+/*  !*position: absolute;*!*/
+/*  background-color: transparent;*/
+/*  !*background-color: #A27B5C;*!*/
+/*height: 90%;*/
+/*}*/

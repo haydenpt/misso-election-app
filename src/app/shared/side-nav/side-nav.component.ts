@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../services/authentication/authentication.service";
 
@@ -16,14 +16,48 @@ export class SideNavComponent implements OnInit {
     {name: 'Log Out', icon: 'exit_to_app', destination: 'login'},
   ]
 
-  constructor(private router : Router,
+  isMobile: boolean = false;
+  navOpen: boolean = true;
+  screenBreakpoint: number = 800;
+
+  screenHeight: number | undefined;
+  screenWidth: number | undefined;
+
+  constructor(private router: Router,
               private authService: AuthenticationService) {
+    this.getScreenSize();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?: any) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    this.onViewChange(this.screenWidth);
   }
 
   ngOnInit(): void {
   }
 
-  onNavigate(destination : string) {
+  onViewChange(width: number) {
+    if (width <= this.screenBreakpoint) {
+      this.isMobile = true;
+      this.navOpen = false;
+    }
+    if (width > this.screenBreakpoint) {
+      this.isMobile = false;
+      this.navOpen = true;
+    }
+  }
+
+  onToggleMenu() {
+    this.navOpen = !this.navOpen;
+  }
+
+  closeMenu() {
+    this.navOpen = false;
+  }
+
+  onNavigate(destination: string) {
     this.router.navigate([destination]);
     if (destination === 'login') {
       this.authService.logout();

@@ -51,6 +51,7 @@ import {AuthenticationService} from "./services/authentication/authentication.se
 import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import {PositionService} from "./services/backend/position/position.service";
 import { TokenInterceptor } from './services/config/TokenInterceptor';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 
 @NgModule({
@@ -92,6 +93,7 @@ import { TokenInterceptor } from './services/config/TokenInterceptor';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    MatGridListModule,
   ],
   providers: [
     AlertService,

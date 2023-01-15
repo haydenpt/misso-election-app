@@ -1,5 +1,5 @@
 <mat-drawer-container class="container">
-  <mat-drawer mode="side" [opened]="true" class="sidenav">
+  <mat-drawer mode="side" [opened]="navOpen" class="sidenav">
     <div class="nav-logo-container">
       <img src="/assets/logo-white.png" alt="logo of organization" class="nav-logo">
     </div>
@@ -16,6 +16,14 @@
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content class="sidenav-content">
+    <div [hidden]="!isMobile">
+      <button mat-raised-button
+              color="primary"
+              class="menu-toggle"
+              (click)="onToggleMenu()">
+        <mat-icon>{{navOpen ? "close" : "menu"}}</mat-icon>
+      </button>
+    </div>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

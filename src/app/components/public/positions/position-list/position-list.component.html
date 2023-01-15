@@ -1,5 +1,5 @@
-<ul class="position-list">
-  <li *ngFor="let item of positions" class="position-list-item">
+<mat-grid-list  class="position-list" [cols]="2" >
+  <mat-grid-tile *ngFor="let item of positions">
     <app-position-item [position]="item"></app-position-item>
-  </li>
-</ul>
+  </mat-grid-tile>
+</mat-grid-list>
