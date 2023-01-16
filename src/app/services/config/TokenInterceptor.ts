@@ -3,13 +3,15 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/com
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AuthenticationService} from "../authentication/authentication.service";
+import {LocalStorageService} from "../storage/local-storage.service";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private username: string | undefined;
   private password: string | undefined;
 
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService,
+              private localStorageService: LocalStorageService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -23,7 +25,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   checkUserType(): void {
     // Check user type to determin basic auth credentials
-    if(localStorage.getItem(this.authService.localStorageUserType) === 'admin') {
+    if(this.localStorageService.getJsonValue(this.authService.localStorageUserTypeKey) === 'admin') {
       this.username = environment.apiAdmin.username;
       this.password = environment.apiAdmin.password;
     }

@@ -46,7 +46,6 @@ export class PositionListComponent implements OnInit, ScreenInterface {
           }
         }
       }
-      console.log(this.teams);
     });
     this.positionService.getAllCandidates();
   }

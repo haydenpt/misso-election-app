@@ -3,21 +3,25 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {AlertService} from "../alert/alert.service";
 import {environment} from "../../../environments/environment";
+import {LocalStorageService} from "../storage/local-storage.service";
+import jwt_decode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  loginStateInLocalStorage: string = 'logged_in';
   userData: any;
 
-  localStorageUser: string = 'user'
-  localStorageUserType: string = 'user_type'
+  localStorageUserKey: string = environment.key.localStorageUserKey;
+  localStorageUserTypeKey: string = environment.key.localStorageUserTypeKey;
+  localStorageEmailKey: string = environment.key.localStorageEmailKey;
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private localStorageService: LocalStorageService
   ) {
 
     /* Saving user data in localstorage when
@@ -25,19 +29,22 @@ export class AuthenticationService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        localStorage.setItem(this.localStorageUser, JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem(this.localStorageUser)!);
+        this.localStorageService.setJsonValue(this.localStorageUserKey, this.userData._delegate.accessToken)
       } else {
         // When logout
-        // localStorage.setItem(this.localStorageUser, 'null');
-        // JSON.parse(localStorage.getItem(this.localStorageUser)!);
         localStorage.clear();
       }
     });
   }
 
-  isLoggedIn() {
-    return localStorage.getItem(this.localStorageUser) !== null;
+  isLoggedIn(): boolean {
+    // Compare email in decoded jwt with local storage email to validate access token
+    if (this.localStorageService.getJsonValue(this.localStorageUserKey) !== null) {
+      const decodedJwt: any = jwt_decode(this.localStorageService.getJsonValue(this.localStorageUserKey));
+      const localStorageEmail: string = this.localStorageService.getJsonValue(this.localStorageEmailKey);
+      return decodedJwt.email === localStorageEmail;
+    }
+    return false;
   }
 
   login(email: string, password: string) {
@@ -45,8 +52,13 @@ export class AuthenticationService {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        // set user type to determine basic auth credentials
-        localStorage.setItem(this.localStorageUserType, environment.apiAdmin.email.includes(<string>result.user?.email) ? 'admin' : 'member');
+
+        // Set user type to determine basic auth credentials
+        this.localStorageService.setJsonValue(this.localStorageUserTypeKey, environment.apiAdmin.email.includes(<string>result.user?.email) ? 'admin' : 'member');
+
+        // Store user email in local storage to validate login session
+        this.localStorageService.setJsonValue(this.localStorageEmailKey, email);
+
         this.afAuth.authState.subscribe((user) => {
           if (user) {
             this.alertService.alert('success', 'success')
@@ -60,11 +72,9 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.afAuth.signOut().then(() => {
+    if (localStorage.length > 0) {
       this.alertService.alert('info', 'You have been logged out.')
-    });
-
+    }
+    this.afAuth.signOut();
   }
-
-
 }
