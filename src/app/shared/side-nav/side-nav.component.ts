@@ -18,7 +18,7 @@ export class SideNavComponent implements OnInit {
 
   isMobile: boolean = false;
   navOpen: boolean = true;
-  screenBreakpoint: number = 800;
+  screenBreakpoint: number = 1024;
 
   screenHeight: number | undefined;
   screenWidth: number | undefined;

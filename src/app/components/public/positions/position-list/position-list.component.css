@@ -1,6 +1,5 @@
-.position-list {
-  display: flex;
-  width: 100%;
+
+mat-grid-tile {
   /*border: 2px solid;*/
-  list-style-type: none;
+
 }

@@ -1,11 +1,22 @@
+<!--<div class="position-card">-->
+<!--  <div class="position-card-content">-->
+<!--    <p class="position-title mat-h4">{{ position.title }}</p>-->
+<!--    <mat-icon>{{ position.icon }}</mat-icon>-->
+<!--  </div>-->
+<!--  <div class="position-card-action">-->
+<!--    <button mat-raised-button color="primary" (click)="onViewPrompt(position.promptUrl)">View Prompt</button>-->
+<!--    <button mat-raised-button color="accent"  (click)="onApply(position.title)">Apply</button>-->
+<!--    <button mat-raised-button (click)="onViewCandidate(position)">View Candidates</button>-->
+<!--  </div>-->
+<!--</div>-->
+
 <div class="position-card">
-  <div class="position-card-content">
-    <p class="position-title mat-h4">{{ position.title }}</p>
-    <mat-icon>{{ position.icon }}</mat-icon>
-  </div>
-  <div class="position-card-action">
-    <button mat-raised-button color="primary" (click)="onViewPrompt(position.promptUrl)">View Prompt</button>
-    <button mat-raised-button color="accent"  (click)="onApply(position.title)">Apply</button>
-    <button mat-raised-button (click)="onViewCandidate(position)">View Candidates</button>
-  </div>
+  <p class="position-title mat-h4">{{ position.title }}</p>
+<!--  <img [src]="position.imageUrl" class="position-image">-->
+    <div class="position-card-action">
+      <button mat-raised-button color="primary" (click)="onViewPrompt(position.promptUrl)">View Prompt</button>
+      <button mat-raised-button color="accent"  (click)="onApply(position.title)">Apply</button>
+      <button mat-raised-button (click)="onViewCandidate(position)">View Candidates</button>
+    </div>
 </div>
+

@@ -1,5 +1,10 @@
-<mat-grid-list  class="position-list" [cols]="2" >
-  <mat-grid-tile *ngFor="let item of positions">
-    <app-position-item [position]="item"></app-position-item>
-  </mat-grid-tile>
-</mat-grid-list>
+
+<ng-container *ngFor="let team of teams">
+  <p class="mat-h1" >{{team.name}}</p>
+  <mat-grid-list [cols]="columns" rowHeight="300px" gutterSize="10">
+    <mat-grid-tile *ngFor="let item of team.position">
+      <app-position-item [position]="item"></app-position-item>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-container>
+
