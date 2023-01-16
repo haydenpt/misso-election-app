@@ -10,7 +10,17 @@
 
 .sidenav-content {
   width: 100%;
-  margin: 20px;
+  /*margin: 20px;*/
+  padding: 10px;
+}
+
+@media (max-width:1024px) {
+  .sidenav-content {
+    position: fixed;
+    /*right: 0;*/
+    /*left: 0;*/
+  }
+
 }
 
 .nav-list {

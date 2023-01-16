@@ -1,8 +1,8 @@
 
-<ng-container *ngFor="let team of teams">
+<ng-container *ngFor="let team of teams" >
   <p class="mat-h1" >{{team.name}}</p>
-  <mat-grid-list [cols]="columns" rowHeight="300px" gutterSize="10">
-    <mat-grid-tile *ngFor="let item of team.position">
+  <mat-grid-list [cols]="columns" rowHeight="300px" gutterSize="10" class="position-list">
+    <mat-grid-tile *ngFor="let item of team.position" class="position-list-item">
       <app-position-item [position]="item"></app-position-item>
     </mat-grid-tile>
   </mat-grid-list>

@@ -24,7 +24,7 @@ export class PositionListComponent implements OnInit, ScreenInterface {
   screenWidth = window.innerWidth;
 
   screenSize = {
-    desktop: 1025,
+    desktop: 1200,
     laptop: 769,
     tablet: 481,
     mobile: 320
@@ -62,7 +62,7 @@ export class PositionListComponent implements OnInit, ScreenInterface {
     if (width >= this.screenSize.desktop) {
       this.setColumns(4);
     } else if (width >= this.screenSize.laptop) {
-      this.setColumns(2);
+      this.setColumns(3);
     } else if (width >= this.screenSize.tablet) {
       this.setColumns(2);
     } else {
