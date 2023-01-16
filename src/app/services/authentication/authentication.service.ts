@@ -16,6 +16,7 @@ export class AuthenticationService {
   localStorageUserKey: string = environment.key.localStorageUserKey;
   localStorageUserTypeKey: string = environment.key.localStorageUserTypeKey;
   localStorageEmailKey: string = environment.key.localStorageEmailKey;
+  localStorageIdKey: string = environment.key.localStorageIdKey
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,12 +25,14 @@ export class AuthenticationService {
     private localStorageService: LocalStorageService
   ) {
 
-    /* Saving user data in localstorage when
+    /* Saving user encrypted access token in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         this.localStorageService.setJsonValue(this.localStorageUserKey, this.userData._delegate.accessToken)
+        this.localStorageService.setJsonValue(this.localStorageIdKey, this.userData._delegate.uid)
+        // this.localStorageService.setJsonValue(this.localStorageUserKey, this.userData._delegate.)
       } else {
         // When logout
         localStorage.clear();
@@ -42,7 +45,9 @@ export class AuthenticationService {
     if (this.localStorageService.getJsonValue(this.localStorageUserKey) !== null) {
       const decodedJwt: any = jwt_decode(this.localStorageService.getJsonValue(this.localStorageUserKey));
       const localStorageEmail: string = this.localStorageService.getJsonValue(this.localStorageEmailKey);
-      return decodedJwt.email === localStorageEmail;
+      const localStorageId: string = this.localStorageService.getJsonValue(this.localStorageIdKey);
+
+      return decodedJwt.email === localStorageEmail && decodedJwt.user_id === localStorageId;
     }
     return false;
   }
