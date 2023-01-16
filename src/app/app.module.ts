@@ -39,7 +39,6 @@ import {LoginPageComponent} from './pages/login-page/login-page.component';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {PromptListPageComponent} from './pages/prompt-list-page/prompt-list-page.component';
 import {PromptDetailPageComponent} from './pages/prompt-detail-page/prompt-detail-page.component';
-import {MyAccountPageComponent} from './pages/my-account-page/my-account-page.component';
 import {CandidatePageComponent} from './pages/candidate-page/candidate-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
@@ -52,7 +51,11 @@ import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 import {PositionService} from "./services/backend/position/position.service";
 import { TokenInterceptor } from './services/config/TokenInterceptor';
 import {MatGridListModule} from "@angular/material/grid-list";
-
+import {MatTableModule} from "@angular/material/table";
+import { CdkTableModule } from '@angular/cdk/table';
+import {MyAccountPageComponent} from "./pages/my-account-page/my-account-page.component";
+import { MyAccountComponent } from './components/public/account/my-account/my-account.component';
+import {MyAcountService} from "./services/backend/my-account/my-acount.service";
 
 @NgModule({
   declarations: [
@@ -67,11 +70,12 @@ import {MatGridListModule} from "@angular/material/grid-list";
     HomePageComponent,
     PromptListPageComponent,
     PromptDetailPageComponent,
-    MyAccountPageComponent,
     AlertComponent,
     CandidateListComponent,
     CandidatePageComponent,
     NotFoundPageComponent,
+    MyAccountPageComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -94,12 +98,15 @@ import {MatGridListModule} from "@angular/material/grid-list";
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MatGridListModule,
+    MatTableModule,
+    CdkTableModule
   ],
   providers: [
     AlertService,
     AuthenticationService,
     AuthGuardService,
     PositionService,
+    MyAcountService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
